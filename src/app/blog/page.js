@@ -1,45 +1,47 @@
-import React from "react";
-import Card from "./components/Card";
-import "bootstrap/dist/css/bootstrap.min.css";
+"use client";
 
-const Blog = async () => {
-  let posts = [];
-  let errorMessage = "";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-  try {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((json) => console.log(json));
-    if (!response.ok) {
-      // Handle non-200 responses
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+const ProductDetails = ({ params }) => {
+  const { id } = params;
+  const [product, setProduct] = useState(null);
+  const router = useRouter();
 
-    posts = await response.json();
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    errorMessage = "Error loading posts. Please try again later.";
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        // Handle error accordingly
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (!product) {
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="container mt-5">
-      {errorMessage ? (
-        <div className="text-center">{errorMessage}</div>
-      ) : (
-        <div className="row">
-          {posts.length === 0 ? (
-            <div className="text-center">No posts available.</div>
-          ) : (
-            posts.map((item) => (
-              <div className="col-md-4 mb-4" key={item.id}>
-                <Card id={item.id} title={item.title} body={item.body} />
-              </div>
-            ))
-          )}
-        </div>
-      )}
+      <div className="text-center">
+        <img src={product.image} alt={product.title} className="img-fluid" />
+        <h1>{product.title}</h1>
+        <p>{product.description}</p>
+        <p>
+          <strong>Price:</strong> ${product.price}
+        </p>
+      </div>
     </div>
   );
 };
 
-export default Blog;
+export default ProductDetails;
