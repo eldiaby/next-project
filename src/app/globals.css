@@ -1,0 +1,30 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.header,
+.footer {
+    height: 80px;
+    background-color: #e1e1e1;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+.main {
+    flex: 1;
+    padding: 10px;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
