@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported
+import "./globals.css"; // Global styles
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -14,11 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="content">
-          <Header />
+        <Header />
+        <main className="container mt-4">
           <div className="main">{children}</div>
-          <Footer />
         </main>
+        <Footer />
       </body>
     </html>
   );

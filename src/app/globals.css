@@ -1,30 +1,22 @@
 body {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #f8f9fa;
 }
 
-.header,
-.footer {
-    height: 80px;
-    background-color: #e1e1e1;
+main {
+  min-height: 80vh; /* Ensure the main content area has sufficient height */
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-
+  padding: 20px; /* Optional padding for the main content */
 }
 
-.main {
-    flex: 1;
-    padding: 10px;
-}
-
-.loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1rem;
 }
